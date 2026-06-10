@@ -1,0 +1,56 @@
+body{
+    margin:0;
+    font-family:Arial;
+}
+
+/* AUTH PAGE BACKGROUND */
+body.auth-page{
+    background:url("/static/img/netflix1.png") no-repeat center center fixed;
+    background-size:cover;
+}
+
+/* DARK OVERLAY */
+body.auth-page::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+/* LOGIN BOX */
+.login-box{
+    position:relative;
+    width:350px;
+    margin:120px auto;
+    padding:40px;
+    background:rgba(0,0,0,0.85);
+    border-radius:10px;
+}
+
+/* INPUT */
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:none;
+    outline:none;
+}
+
+/* BUTTON */
+.login-box button{
+    width:100%;
+    padding:12px;
+    background:#e50914;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+/* TITLE */
+.login-box h1{
+    text-align:center;
+    color:white;
+}

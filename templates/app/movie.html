@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% block content %}
+
+<div class="movie-page">
+
+    <div class="movie-container">
+        <h1 class="movie-title">{{ movie.title }}</h1>
+<div class="video-box">
+<video id="movieVideo" controls preload="metadata" style="display:none;">
+    <source src="{{ movie.video.url }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+    <div id="moviePoster" style="position:relative;">
+
+        <img src="{{ movie.image_cover.url }}" class="movie-banner">
+
+        <button
+            onclick="playMovie()"
+            style="
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%,-50%);
+                background:#e50914;
+                color:white;
+                border:none;
+                padding:15px 35px;
+                font-size:20px;
+                border-radius:6px;
+                cursor:pointer;
+            ">
+            ▶ Play
+        </button>
+
+    </div>
+
+</div>
+<div class="movie-info">
+    <p>{{ movie.description }}</p>
+
+    <p><b>Genre:</b> {{ movie.genre }}</p>
+    <p><b>Length:</b> {{ movie.length }} min</p>
+</div>
+    </div>
+
+</div>
+<script>
+function playMovie(){
+
+    document.getElementById("moviePoster").style.display = "none";
+
+    const video = document.getElementById("movieVideo");
+
+    video.style.display = "block";
+
+    video.play();
+}
+</script>
+{% endblock %}

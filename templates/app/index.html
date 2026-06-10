@@ -1,0 +1,153 @@
+
+{% extends 'app/base.html' %}
+{% block content %}
+<div class="hero-banner">
+
+    <h1>Unlimited Movies, TV Shows & More</h1>
+
+    <p>Watch anywhere. Cancel anytime.</p>
+
+    <a href="#movies" class="watch-btn">
+        Browse Movies
+    </a>
+
+</div>
+
+<div class="genre-bar">
+    <a href="{% url 'app:genre' 'action' %}">Action</a>
+    <a href="{% url 'app:genre' 'comedy' %}">Comedy</a>
+    <a href="{% url 'app:genre' 'drama' %}">Drama</a>
+    <a href="{% url 'app:genre' 'horror' %}">Horror</a>
+    <a href="{% url 'app:genre' 'romance' %}">Romance</a>
+    <a href="{% url 'app:genre' 'thriller' %}">Thriller</a>
+</div>
+
+
+<h3 id="movies" class="section-title">
+    Popular Movies
+</h3>
+
+<div class="movies-container">
+
+{% for movie in movies %}
+
+<div class="movie-card"
+     onclick="openMovie(
+        '{{ movie.title|escapejs }}',
+        '{{ movie.description|escapejs }}',
+        '{{ movie.image_card.url }}',
+        '{{ movie.uu_id }}'
+     )">
+
+    <img src="{{ movie.image_card.url }}">
+
+    <h3>{{ movie.title }}</h3>
+
+    <div class="movie-actions">
+
+        <a href="{% url 'app:movie' movie.uu_id %}" class="watch-btn">
+            ▶ Watch
+        </a>
+
+       <button type="button"
+        class="add-btn"
+        onclick="addToList('{{ movie.uu_id }}')">
+    + My List
+</button>
+
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="movieModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+
+      <div class="modal-header">
+        <h5 id="mTitle"></h5>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+ 
+    <img id="mImg" class="img-fluid mb-3" alt="Movie Poster">
+    <p id="mDesc"></p>
+
+    <a id="playBtn" class="btn btn-danger mb-2">▶ Play</a>
+
+    <button type="button"
+            class="btn btn-success w-100 mb-2"
+            onclick="addToListFromModal()">
+        + Add to My List
+    </button>
+
+    <button type="button"
+            class="btn btn-secondary w-100"
+            data-bs-dismiss="modal">
+        Close
+    </button>
+
+</div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+
+let currentMovieId = null;
+
+function openMovie(title, desc, img, id){
+
+    currentMovieId = id;
+
+    document.getElementById('mTitle').innerText = title;
+    document.getElementById('mDesc').innerText = desc;
+    document.getElementById('mImg').src = img;
+    document.getElementById('playBtn').href = "/movie/" + id;
+
+    new bootstrap.Modal(document.getElementById('movieModal')).show();
+}
+
+function addToListFromModal(){
+
+    fetch("{% url 'app:add_to_list' %}", {
+        method:"POST",
+        headers:{
+            "X-CSRFToken":"{{ csrf_token }}",
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:"movie_id=" + currentMovieId
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+}
+/* REMOVE FROM LIST */
+function removeFromList(){
+
+    fetch("{% url 'app:remove_from_list' %}", {
+        method:"POST",
+        headers:{
+            "X-CSRFToken":"{{ csrf_token }}",
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:"movie_id=" + currentMovieId
+    })
+    .then(res => res.json())
+    .then(data => {
+    alert(data.message);
+});
+}
+
+</script>
+{% endblock %}

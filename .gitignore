@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+env/
+
+# Database
+db.sqlite3
+
+# Media uploads / videos
+media/
+static/video/
+*.mp4
+*.mov
+*.avi
+
+# Collected static files
+staticfiles/
+
+# VS Code
+.vscode/
+
+# Environment variables (optional if you have .env file)
+.env

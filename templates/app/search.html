@@ -1,0 +1,72 @@
+
+
+{% extends 'app/base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<h2 class="search-title">
+    Search Results for "{{ query }}"
+</h2>
+
+<div class="search-container">
+
+    {% if movies %}
+
+        {% for movie in movies %}
+
+        <div class="movie-card">
+
+            <img src="{{ movie.image_card.url }}">
+            <h3>{{ movie.title }}</h3>
+
+            <div class="movie-actions">
+
+                <a href="{% url 'app:movie' movie.uu_id %}" class="watch-btn">
+                    ▶ Watch
+                </a>
+
+                <button type="button"
+                        class="add-btn"
+                        onclick="addToList('{{ movie.uu_id }}')">
+                    + My List
+                </button>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p class="search-empty">
+            No movies found
+        </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function addToList(movieId){
+
+    fetch("{% url 'app:add_to_list' %}", {
+        method:"POST",
+        headers:{
+            "X-CSRFToken":"{{ csrf_token }}",
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:"movie_id=" + movieId
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+}
+</script>
+{% endblock %}

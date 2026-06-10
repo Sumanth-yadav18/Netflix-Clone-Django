@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% block content %}
+
+<h3 class="mb-4">My List</h3>
+
+<div class="mylist-container">
+{% if movies %}
+
+    {% for item in movies %}
+
+<div class="movie-card">
+
+    <img src="{{ item.movie.image_card.url }}">
+
+    <h3>{{ item.movie.title }}</h3>
+
+    <div class="movie-actions">
+
+        <a href="{% url 'app:movie' item.movie.uu_id %}" class="watch-btn">
+            ▶ Watch
+        </a>
+
+        <form method="POST" action="{% url 'app:remove_from_list' %}">
+            {% csrf_token %}
+            <input type="hidden" name="movie_id" value="{{ item.movie.uu_id }}">
+            <button type="submit" class="add-btn">
+                Remove
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+    <p style="text-align:center; width:100%; color:#aaa;">
+    Your list is empty
+    </p>
+{% endif %}
+
+</div>
+
+{% endblock %}

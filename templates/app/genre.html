@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+
+{% block title %}{{ genre }}{% endblock %}
+
+{% block content %}
+
+<h2 style="padding:20px;">
+    {{ genre|title }} Movies
+</h2>
+
+<div class="movies-container genre-container">
+
+    {% for movie in movies %}
+
+    <div class="movie-card">
+
+    <img src="{{ movie.image_card.url }}">
+    <h3>{{ movie.title }}</h3>
+
+    <div class="movie-actions">
+        <a href="{% url 'app:movie' movie.uu_id %}"
+           class="watch-btn">
+            ▶ Watch
+        </a>
+    </div>
+
+</div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
