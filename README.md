@@ -64,7 +64,7 @@ http://127.0.0.1:8000/
 <img src="screenshots/login-page.png" width="900">
 
 ### Signup Page
-<img src="screenshots/signup-page.png" width="900">
+<img src="screenshots/Signup-page.png" width="900">
 
 ### Cards Page
 <img src="screenshots/Cards-page.png" width="900">
