@@ -20,9 +20,11 @@ TEMPLATE_DIR=os.path.join(BASE_DIR,'templates')
 # secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = [
+    ".onrender.com",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -108,6 +110,6 @@ STATICFILES_DIRS=[ # to to deal with images css js
     os.path.join(BASE_DIR,'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL='/media/' # to store movie images & videos
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
