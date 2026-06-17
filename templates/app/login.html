@@ -4,7 +4,6 @@
 <html>
 <head>
     <title>Login</title>
-
     <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 </head>
 
@@ -17,17 +16,40 @@
         {% csrf_token %}
         <input type="text" name="username" placeholder="Username">
         <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
+        <button type="submit" name="login">Login</button>
     </form>
+    <p style="margin-top:10px;">New user?<a href="{% url 'app:signup' %}">Signup</a></p>
 
-    <p>New user? <a href="{% url 'app:signup' %}">Signup</a></p>
-    {% if messages %}
-    {% for message in messages %}
-        <p style="color:red; font-size:13px; margin-top:8px;">
-            {{ message }}
-        </p>
-    {% endfor %}
+    <p>
+        <a href="#" onclick="document.getElementById('fp').style.display=
+        document.getElementById('fp').style.display==='block'?'none':'block'">
+        Forgot Password?</a>
+    </p>
+
+<div id="fp" style="display:none;">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Enter email">
+        <button type="submit" name="reset">Continue</button>
+    </form>
+</div>
+
+{% if request.session.reset_user %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="password" name="new_password" placeholder="New Password">
+    <button type="submit" name="update_password">Update Password</button>
+</form>
 {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red; font-size:13px; margin-top:8px;">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
 </div>
 
 </body>
