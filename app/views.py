@@ -19,7 +19,7 @@ def index(request):
 from django.contrib import messages
 
 def login_user(request):
-    if request.method == "POST":
+    if request.method == "POST": 
 
         # LOGIN
         if "login" in request.POST:
