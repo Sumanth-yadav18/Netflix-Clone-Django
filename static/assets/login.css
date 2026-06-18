@@ -7,17 +7,14 @@ body{
 body.auth-page{
     background:url("/static/img/netflix1.png") no-repeat center center fixed;
     background-size:cover;
-}
 
-/* DARK OVERLAY */
-body.auth-page::before{
-    content:"";
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+    padding:20px;
+    box-sizing:border-box;
 }
 
 /* LOGIN BOX */
@@ -53,4 +50,51 @@ body.auth-page::before{
 .login-box h1{
     text-align:center;
     color:white;
+}
+.box{
+    position:relative;
+    z-index:1;
+
+    width:100%;
+    max-width:400px;
+
+    padding:40px 30px;
+    background:rgba(0,0,0,0.85);
+    border-radius:10px;
+
+    box-sizing:border-box;
+}
+
+.box input{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:none;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.box button{
+    width:100%;
+    padding:12px;
+    background:#e50914;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+@media (max-width:576px){
+
+    .box{
+        padding:30px 20px;
+    }
+
+    .box h2{
+        font-size:22px;
+    }
+
+    .box input,
+    .box button{
+        height:44px;
+    }
 }

@@ -18,13 +18,14 @@ import os
 TEMPLATE_DIR=os.path.join(BASE_DIR,'templates')
 
 # secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "cfb265a8ae949f9c6d72b3d8b40a39e9"
+)
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    ".onrender.com",
-]
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
