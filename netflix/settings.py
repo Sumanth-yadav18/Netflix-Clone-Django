@@ -143,7 +143,18 @@ STORAGES = {
 }
 
 # Run once, then remove!
-from django.contrib.auth import get_user_model
-User = get_user_model()
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@email.com', 'admin')
+import django
+from django.apps import apps
+
+def create_superuser():
+    try:
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        if not User.objects.filter(username='admin').exists():
+            User.objects.create_superuser('admin', 'admin@email.com', 'adminadmin')
+    except Exception:
+        pass
+
+from django.db.models.signals import post_migrate
+from django.apps import AppConfig
+post_migrate.connect(lambda **kwargs: create_superuser())
