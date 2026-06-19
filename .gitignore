@@ -7,7 +7,6 @@ venv/
 env/
 
 # Database
-db.sqlite3
 
 # Media uploads / videos
 media/
