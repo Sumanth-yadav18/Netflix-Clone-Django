@@ -73,7 +73,6 @@ def signup(request):
         email = request.POST.get('email').strip().lower()
         password = request.POST.get('password').strip()
 
-        # 🚨 MUST BE HERE (BEFORE USING IT)
         email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 
         if not username or not email or not password:
@@ -157,7 +156,7 @@ def add_to_list(request):
 
         movie_id = request.POST.get('movie_id')
 
-        # direct UUID safe handling
+        # UUID
         movie = get_object_or_404(Movie, uu_id=movie_id)
 
         obj, created = Movielist.objects.get_or_create(user=request.user,movie=movie)

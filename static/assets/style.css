@@ -79,7 +79,7 @@ body.auth-page::before{
     gap: 12px;
 }
 .box input{
-    margin: 0; /* remove unwanted spacing conflicts */
+    margin: 0; /* removing unwanted spacing conflicts */
 }
 /* =========================
    NAVBAR
@@ -246,7 +246,7 @@ body.auth-page::before{
     background:#e50914;
 }
 /* =========================
-   MOVIE DETAIL PAGE (FIXED)
+   MOVIE DETAIL PAGE 
 ========================= */
 .movie-page{
     display:flex;
@@ -279,13 +279,13 @@ body.auth-page::before{
     line-height:1.6;
 }
 /* =========================
-   GLOBAL MEDIA FIX
+   GLOBAL MEDIA 
 ========================= */
 img, video{
     max-width:100%;
 }
 /* =========================
-   TEXT FIX
+   TEXT 
 ========================= */
 .movies-container p{
     color:#aaa;
@@ -307,7 +307,7 @@ img, video{
     text-align: center;
     color: #aaa;
 }
-/* SEARCH LAYOUT FIX */
+/* SEARCH LAYOUT  */
 .search-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 200px));

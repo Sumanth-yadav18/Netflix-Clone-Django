@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-# Run once, then remove!
-
 from pathlib import Path
 import os
 
